@@ -33,10 +33,10 @@ from shareplum import Site
 from shareplum import Office365
 
 #open the sharepoint list to edit
-authcookie = Office365('https://mytrinityhealth.sharepoint.com/', 
+authcookie = Office365('yoursharepointsite', 
                        username=userInfo['username'], 
                        password=userInfo['password']).GetCookies()
-site = Site('https://mytrinityhealth.sharepoint.com/sites/JFCCTherapistsTHO365',
+site = Site('yoursharepointlistsite',
             authcookie=authcookie)
 
 listName='TxTimeOutDates'
@@ -54,7 +54,7 @@ data = sp_list.GetListItems(fields=['ID','Title','PatientId','NumTimeoutsNeeded'
 tempDir=Path('C:/Temp3/finals/')
 
 # Create connection
-con = pyodbc.connect(driver="{SQL Server}",server='mshsaptvard1',database='variansystem',uid='reports',pwd='reports',autocommit=True)
+con = pyodbc.connect(driver="{SQL Server}",server='servername',database='variansystem',uid='username',pwd='password',autocommit=True)
 cur = con.cursor()
 #get patients that have had a final approved in this date range
 n=datetime.datetime(2021,1,1)
@@ -227,7 +227,7 @@ order by FileLocation.FileName asc
             doc=word.ActiveDocument
             numTables=doc.Tables.Count
             numTimeOuts=0
-            #TODO Need to make this table in tabled
+            #TODO Need to make this table in tables could also search for paragraphs here
             for k in range(numTables):
                 table=doc.Tables(k+1)
                 cont=table.Cell(Row=1,Column=2).Range.Text
@@ -327,8 +327,8 @@ order by FileLocation.FileName asc
 #     # if(ntimes-nloops>0):
 #     #     firstRange=nloops*batchSize
 #     #     lastRange=len(AppList)-1
-#     authcookie = Office365('https://mytrinityhealth.sharepoint.com/', username=userInfo['username'], password=userInfo['password']).GetCookies()
-#     site = Site('https://mytrinityhealth.sharepoint.com/sites/JFCCTherapistsTHO365', authcookie=authcookie)
+#     authcookie = Office365('yoursharepointsite', username=userInfo['username'], password=userInfo['password']).GetCookies()
+#     site = Site('yoursharepointlistsite', authcookie=authcookie)
 #     listName='TxTimeOutDates'
 #     sp_list = site.List(listName)
 #     data = sp_list.GetListItems('All Items')
