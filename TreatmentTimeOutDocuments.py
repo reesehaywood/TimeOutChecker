@@ -18,7 +18,7 @@ import shutil,os,time
 tempDir=Path('C:/Temp3/finals/')
 
 # Create connection
-con = pyodbc.connect(driver="{SQL Server}",server='mshsaptvard1',database='variansystem',uid='reports',pwd='reports',autocommit=True)
+con = pyodbc.connect(driver="{SQL Server}",server='servername',database='variansystem',uid='username',pwd='password',autocommit=True)
 cur = con.cursor()
 #get patients that have had a final
 #last date run 10-31-19
